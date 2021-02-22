@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function highlight(string,...value){
+            // debugger
+            const highlighted = value.map(value => `<span calss = 'highlighted'> ${value}</span>`)
+            let str = ''
+
+            string.forEach((element,i) => {
+                str+= `${element}${highlighted[i] || ''}`
+            }); 
+            return str 
+        }
+
+        const user = 'Patrick';
+        const topic = 'Learn to use markdown';
+        const sentence = highlight`${user} has commented on your topic ${topic}`
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
