@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     window.onload = function(){
+		noParamA();
+		console.log(sumA(2,3));
+		console.log(sumAdd5(2,3));
+	 }
+	  
+	 let noParam = function(){
+		return 7;
+	 } 
+	 //无参箭头
+	 let noParamA = () => console.log(7)
+	 
+	 
+	 let sum = function(a,b){
+		return a+b;
+	 }
+	 
+	 //带参箭头函数
+	 let sumA = (a,b)=> a + b;
+	 
+	 
+	 let sumAdd = function(a,b){
+		a = a + 1;
+		b = b + 1;
+		return a+ b;
+	 }
+	 
+	 //多行函数体的箭头函数
+	 let sumAdd5 = (a,b) => {
+		a = a + 1;
+		b = b + 1;
+		return a+ b;
+	 }
+	 
+	 
+	 
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const fruits = ['apple','mongo','banana','orange']
+
+        // for (const index in fruits) {
+        //     console.log(fruits[index])
+        // }
+
+        // fruits.forEach(fruit => {
+        //     console.log(fruit)
+        // });
+        
+        //for of 循环可以支持 break for in 和 forEach 不支持break等 fori语法繁琐
+        for(let fruit of fruits){
+            if(fruit == 'orange'){
+                break;
+            }
+            console.log(fruit);
+        }
+
+        //es6中 不能支持对象遍历，Map,set,array都可以便利
+        for(let [index,value] of fruits.entries()){
+            console.log(`index : ${index} value : ${value}`)
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .heading span{
+            cursor: pointer;
+            display: inline-block;
+        }
+        .heading span:hover{
+            color: red;
+            transform: translate(-20px) rotate(10deg) scale(2);
+        }
+    </style>
+</head>
+<body>
+    <h2 class="heading">PATRICK</h2>
+    <script>
+        const heading = document.querySelector('.heading')
+        heading.innerHTML = wrapWithSapn(heading.textContent)
+
+        function wrapWithSapn(word){
+            return [...word].map(letter => `<span>${letter}</span>`).join('')
+        }
+    </script>
+</body>
+</html>

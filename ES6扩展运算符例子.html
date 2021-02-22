@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 扩展运算符是咧</title>
+</head>
+<body>
+
+    <ul>
+        <li>通过扩展运算符把，可遍历对象扩展到新的数组中</li>
+        <li>扩展数组</li>
+        <li>删除一个对象并返回新的数组</li>
+        <li>扩展运算符在函数的应用</li>
+    </ul>
+    <script>
+        //通过扩展运算符把，可遍历对象扩展到新的数组中 = Aarry.from(document.querySelectorAll("li"))
+
+        const ex = [...document.querySelectorAll("li")]
+        const names = ex.map(todo => todo.textContent)
+        console.log(`names is ${names}`)
+
+        //扩展数组
+        const shoppingList = ['apple','banana',...names]
+        console.log(`shoppingList is ${shoppingList}`)
+
+        //删除一个对象并返回新的数组
+        const todos = [
+            {id:1,name: 'tom',state : false},
+            {id:2,name: 'jerry',state : true},
+            {id:3,name: 'patrick',state : false},
+            {id:4,name: 'add',state : false}
+        ]
+        const id = 2
+        const todoIndex = todos.findIndex(todo => todo.id === id)
+        const newTodo = [...todos.splice(0,todoIndex),...todos.splice(todoIndex,todos.length+1)]
+
+        console.log(newTodo)
+
+        //扩展运算符在函数的应用
+        //通过扩展运算符把，可遍历对象扩展到新的数组中传入 参数
+        const fruit = ['apple','bananas','orange']
+        const newFruit = ['pear','mongo']
+        fruit.push(...newFruit);
+        console.log(fruit)
+
+
+        const dateFields = [2021,2,5]
+        console.log(Date(...dateFields)) 
+    </script>
+</body>
+</html>

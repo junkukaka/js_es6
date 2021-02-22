@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array.from() 可以把迭代对象转成数组 </title>
+</head>
+<body>
+    <h2>Array.from() 可以把迭代对象转成数组</h2>
+    <h2>Array.of() 弥补了 new Array() </h2>
+    <ul>
+        <li>aa</li>
+        <li>bb</li>
+        <li>cc</li>
+    </ul>
+
+    <script>
+        const todos = document.querySelectorAll("li")
+    
+        // const todoStr = Array.from(todos)
+        // const names = todoStr.map(todoStr => todoStr.textContent)
+        const names = Array.from(todos,todo => todo.textContent)
+        console.log(names)
+
+        
+        //__proto__: Object ength: 3 对象转换成数组 可以把迭代对象转成数组 
+        function sun(){
+            console.log(arguments)
+            return Array.from(arguments).reduce((prev,curr) => prev + curr, 0)
+        }
+
+        console.log(sun(1,2,3))
+        const arr1 = Array.of(1,2,3)
+        const arr2 = Array.of(2,3,4)
+        console.log(`arr1 is ${arr1} arr2 is ${arr2}`)
+    </script>
+</body>
+</html>

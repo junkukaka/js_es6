@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>一个网页调用多个ajax请求的时候，确保调用顺序，例如网页加载的时候，ajax02 根据ajax01的结果调用。</h2>
+    <p>因为ajax请求是不确定调用顺序的</p>
+    <p>使用then实现promisse</p>
+
+    <script>
+        //返回的是Promise
+        const usersPromise = axios.get('https://api.github.com/users');
+        //console.log(users)
+        // usersPromise.then(response => console.log(response.data))
+        
+        let username;
+
+        usersPromise.then(response => {
+            username = response.data[0].login;
+            return axios.get(`https://api.github.com/users/${username}/repos`)   
+        }).then(response => {
+            console.log(response)
+        }).catch(err => {
+            console.log(err)
+        })
+    </script>
+</body>
+</html>

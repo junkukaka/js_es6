@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const Tom = {
+            name: "patrick",
+            age: 1,
+            family : {
+                father: 'Bob',
+                mother: 'Jenny',
+                brother: 'Toney'
+            }
+        }
+
+        const {name,age, sister = 'no sister'} = Tom
+
+        console.log(`name: ${name} age : ${age} sister  ${sister}` )
+
+        const {father : f, mother : b } = Tom.family
+
+        console.log (`${f} ${b}`)
+        
+        const arr = [1,2,3]
+
+        const [one,...others] = arr
+
+        console.log(one,others)
+
+        console.log(others.join(''));
+        
+        const [x,,,four=4] = arr
+        console.log(four);
+
+        let a = 19 ;
+        let g = 20 ;
+
+        [a,g] = [g,a];
+
+        console.log(g,a)
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
