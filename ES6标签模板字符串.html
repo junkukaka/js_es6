@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document  </title>
+    
+</head>
+<body>
+    <div id="text"></div>
     <script>
         function highlight(string,...value){
             // debugger
@@ -18,14 +22,10 @@
         }
 
         const user = 'Patrick';
-        const topic = 'Learn to use markdown';
-        const sentence = highlight`${user} has commented on your topic ${topic}`
-
-        
-
+        const topic = ['Learn to use markdown','one note'];
+        const sentence = highlight`${user} has commented on your topic ${topic}`;
+        const target = document.getElementById("text");
+        target.insertAdjacentHTML("beforeend",sentence)
     </script>
-</head>
-<body>
-    
 </body>
 </html>

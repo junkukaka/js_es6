@@ -12,6 +12,21 @@
     <p>因为ajax请求是不确定调用顺序的</p>
     <p>使用then实现promisse</p>
 
+    <h2> Promise 状态</h2>
+    <ul>
+        <li>pending（进行中）：初始状态，既没有完成也没有失败。</li>
+        <li>fulfilled（已完成）：操作成功，调用 resolve()，进入 .then()</li>
+        <li>rejected（已拒绝）：操作失败，调用 reject()，进入 .catch()</li>
+    </ul>
+
+    <h2>总结</h2>
+    <ul>
+        <li>Promise.all() :所有 Promise 成功才返回，失败则 .catch()</li>
+        <li>Promise.race(): 第一个 成功或失败的 Promise 立即返回</li>
+        <li>Promise.allSettled() : 无论成功/失败，都返回所有 Promise 结果</li>
+        <li>Promise.any(): 第一个成功 的 Promise 立即返回，所有失败则 .catch()</li>
+        <li>sync/await : 让异步代码更像同步代码，简洁易读</li>
+    </ul>
     <script>
         //返回的是Promise
         const usersPromise = axios.get('https://api.github.com/users');
@@ -28,6 +43,102 @@
         }).catch(err => {
             console.log(err)
         })
+    </script>
+
+    
+
+    <script>
+
+        // 1.Promise 的基本用法 
+        const myPromise = new Promise((resolve,reject) => {
+            setTimeout(()=>{
+                const success = true;
+                if (success) {
+                    resolve("success to action")
+                }else{
+                    reject("failure to action")
+                }
+            },2000)
+        });
+        // use my promise 
+        myPromise.then(result => console.log(result)).catch(error => console.log(error));
+
+        //2.Promise 状态
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("🎉 成功！"), 1000);
+        });
+
+        console.log(promise); // pending
+        setTimeout(() => console.log(promise), 2000); // fulfilled
+
+        //3.链式调用（Promise Chaining）
+        new Promise((resolve) => {
+            resolve(1);
+        })
+        .then((num) => {
+            console.log(num); // 1
+            return num * 2;
+        })
+        .then((num) => {
+            console.log(num); // 2
+            return num * 3;
+        })
+        .then((num) => {
+            console.log(num); // 6
+        });
+
+        //4.Promise.all() （并行执行） 同时执行多个 Promise，所有都成功才进入 .then()，只要有一个失败就进入 .catch()。
+        const p1 = new Promise(res => setTimeout(() => res("🍎"), 1000));
+        const p2 = new Promise(res => setTimeout(() => res("🍌"), 2000));
+        const p3 = new Promise(res => setTimeout(() => res("🍉"), 1500));
+
+        Promise.all([p1, p2, p3])
+        .then(results => console.log(results)) // [ '🍎', '🍌', '🍉' ]
+        .catch(error => console.error(error));
+
+      
+
+    </script>
+    <script>
+          //5.Promise.race()（第一个完成的） 只要有一个 Promise 完成，就直接返回它的结果。
+          Promise.race([
+            new Promise(res => setTimeout(() => res("🚀 1 秒完成"), 1000)),
+            new Promise(res => setTimeout(() => res("🐢 2 秒完成"), 2000)),
+        ])
+        .then(result => console.log(result)) // 🚀 1 秒完成
+        .catch(error => console.error(error));
+
+        //6.Promise.allSettled()（所有完成） 无论 Promise 是 fulfilled 还是 rejected，都会返回所有 Promise 的结果。
+        Promise.allSettled([
+        Promise.resolve("✅ 成功"),
+        Promise.reject("❌ 失败"),
+        new Promise(res => setTimeout(() => res("⏳ 2 秒完成"), 2000))
+        ])
+        .then(results => console.log(results));
+
+        //7. Promise.any()（第一个成功的）
+        Promise.any([
+        Promise.reject("❌ 失败 1"),
+        new Promise(res => setTimeout(() => res("🎉 第一个成功"), 1000)),
+        Promise.reject("❌ 失败 2")
+        ])
+        .then(result => console.log(result)) // 🎉 第一个成功
+        .catch(error => console.error(error));
+
+    </script>
+
+    <script>
+        //async/await 语法糖
+        function delay(ms) {
+            return new Promise(res => setTimeout(res, ms));
+        }
+
+        async function fetchData() {
+            console.log("⌛ 加载数据...");
+            await delay(2000);
+            console.log("✅ 数据加载成功！");
+        }
+        fetchData();
     </script>
 </body>
 </html>

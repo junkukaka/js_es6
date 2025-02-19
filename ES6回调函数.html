@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // fundamental grammar
+        function myCallBack(){
+            console.log("my call back function is executing");
+        }
+
+        function myFunction(callBackFunction){
+            console.log("call back function is executing");
+            callBackFunction();
+        }
+
+        myFunction(myCallBack);
+
+        // callback function with parameter
+
+        function withParameterCallBack(name){
+            console.log(`my name is ${name}`);
+        }
+
+
+        function withParameterFunction(callBackFunction,name){  
+            console.log("with parameter call back function is executing");
+            callBackFunction(name);
+        }
+
+        withParameterFunction(withParameterCallBack,"Patrick");
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

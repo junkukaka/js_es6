@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Object.create(proto, [propertiesObject])
+        //proto：新对象的原型对象（必须是 null 或一个对象）。
+        //propertiesObject（可选）：包含属性描述符的对象，类似于 Object.defineProperties()。
+
+        //示例 1：创建一个对象并指定原型
+       const personPrototype = {
+            name: "Pi",
+            greet() {
+             console.log(`Hello, my name is ${this.name}`);
+            }
+       };
+
+       const person = Object.create(personPrototype);
+       person.greet();
+
+       console.log("-----------------------------------------------------------------------------------------------------------------------------------------");
+
+
+        //示例 2：使用 Object.create() 创建一个对象并定义属性
+       const car = Object.create(Object.prototype, {
+        brand: {
+            value: "Toyota",
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        model: {
+            value: "Camry",
+            writable: false,  // 不能修改
+            enumerable: true,
+            configurable: false
+        }
+        });
+
+        console.log(car.brand); // Toyota
+        car.brand = "Honda"; 
+        console.log(car.brand); // Honda
+
+        console.log(car.model); // Camry
+        car.model = "Accord";  // 不可写，修改不会生效
+        console.log(car.model); // Camry
+
+        // comprehensive example 
+        const dogPrototype = {
+            sound: "MO",
+            bark () {
+                console.log(`${this.sound}`)
+            },
+            model: "dog"
+        }
+
+
+        const dog = Object.create(dogPrototype,{
+            brand: {
+                value: "Toyota",
+                writable: true,
+                enumerable: true,
+                configurable: true
+            },
+            model: {
+                value: "Camry",
+                writable: false,  // 不能修改
+                enumerable: true,
+                configurable: false
+            },
+            closed: {
+                value: "underwear"
+            }
+        });
+
+        dog.bark();
+
+        console.log(dog.brand);
+        console.log(dog.closed);
+        // writable: false,  // 不能修改 不能改写 model 属性
+        dog.model = "cat";
+        console.log(dog.model);
+        
+
+
+    </script>
+</body>
+</html>
