@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASS</title>
+</head>
+<body>
+    <h2>CLASS</h2>
+    <p>JavaScript 的 class 是在 ES6（ECMAScript 2015）中引入的语法，用于更简洁地创建对象和管理继承。它其实是基于原型的继承机制的语法糖。</p>
+    <ul>
+        <li>class 是 prototype 机制的语法糖，但更加直观易用。</li>
+        <li>可以通过 extends 关键字实现继承，并用 super() 调用父类方法或构造函数。</li>
+        <li>支持 getter、setter、static 方法和属性、私有属性 # 等特性。</li>
+        <li>从 ES2022 开始支持更简洁的类字段语法。</li>
+    </ul>
+    <script>
+        //1.使用 class 关键字来定义一个类。构造函数用 constructor() 定义。
+        class Animal{
+            constructor(name) {
+                this.name = name;
+            }
+            speak() {
+                console.log(`${this.name} 发出声音。`);
+            }
+        }
+        //2.创建类的实例
+        const animal = new Animal('小猫');
+        animal.speak();
+        //3.类的继承
+        class Dog extends Animal{
+            constructor(name,breed) {
+                super(name);
+                this.breed = breed;
+            }
+            speak() {
+                console.log(`${this.name} (${this.breed}) 汪汪叫！`);
+            }
+        }    
+        new Dog('旺财', '秋田犬').speak();
+        
+        //4. Getter 和 Setter
+        class Person {
+            constructor(name,age){
+                this._name = name;
+                this._age = age;
+            }
+
+            get name(){
+                return this._name;
+            }
+
+            set name(value){
+                if (value.length == 0) {
+                    throw new Error('名字长度太短！');
+                }else {
+                    this._name = value;
+                }
+                
+            }
+        }
+
+        const person = new Person('小明', 25);
+        console.log(person.name); // 输出: 小明
+        person.name = '小红';
+        console.log(person.name); // 输出: 小红
+
+        //5. 静态方法与静态属性
+        class MathUtils {
+            static PI = 3.14159;
+
+            static square(x) {
+                return x * x;
+            }
+        }
+
+        console.log(MathUtils.PI);         // 输出: 3.14159
+        console.log(MathUtils.square(5));   // 输出: 25
+        MathUtils.PI = 3.15;
+        console.log(MathUtils.PI);    
+
+        // 6. 私有属性与方法 （ES2022 引入） 使用 # 前缀来定义私有属性或方法，不能通过实例直接访问。
+        class Counter {
+            #count = 0;
+            increment() {
+                this.#count++;
+            }
+
+            get count() {
+                return this.#count;
+            }
+        }
+
+        const counter = new Counter();
+        counter.increment();
+        console.log(counter.count); // 输出: 1
+        //console.log(counter.#count); // 报错：私有属性无法访问。
+
+        // 7. 类字段与方法简写  从 ES2022 起，可以直接在类中定义属性，而不必写在 constructor 中。
+        class Car {
+            brand = '特斯拉';  // 类字段（属性）
+
+            showBrand = () => {  // 使用箭头函数定义的方法
+                console.log(`品牌: ${this.brand}`);
+            };
+        }
+
+        const myCar = new Car();
+        myCar.brand = 'BMW';
+        myCar.showBrand();  // 输出: 品牌: 特斯拉
+
+
+
+
+    </script>
+</body>
+</html>

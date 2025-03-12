@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习</title>
+</head>
+<body>
+    <h2>Exercise</h2>
+    <script>
+       function myAxios() {
+        this.get = function(url) {
+                return new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.onload = function() {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                        try {
+                            resolve({ data: JSON.parse(xhr.response) });
+                        } catch (e) {
+                            reject({message: "could not parse response as json", error: e})
+                        }
+                        } else {
+                        reject({ status: xhr.status, statusText: xhr.statusText });
+                        }
+                    };
+                    xhr.onerror = function() {
+                        reject({ message: 'Network Error' });
+                    };
+                    xhr.send();
+                });
+            };
+        }
+       
+       const my = new myAxios();
+       my.get("https://api.github.com/users").then(res=>{
+           console.log(res);
+       })
+    
+    
+    </script>
+</body>
+</html>
